@@ -1,10 +1,10 @@
 import React from 'react';
+import Card from './Card';
 import weatherKey from './secret';
 
 class WeekContainer extends React.Component {
     state = {
-        fullData: [],
-        dailyData: []
+        days: []
     }
 
     componentDidMount = () => {
@@ -15,16 +15,23 @@ class WeekContainer extends React.Component {
         .then(data => {
             const dailyData = data.list.filter(reading => reading.dt_txt.includes('18:00:00'))
             this.setState({
-                fullData: data.list,
-                dailyData: dailyData
+                days: dailyData
             }, () => console.log(this.state))
         })
+    }
+
+    formatDayCards = () => {
+        return this.state.days.map((day, index) => <Card day={day} key={index} />)
     }
     render() {
 
         return (
-            <div>
-                <h1>Hello World</h1>
+            <div className="container">
+                <h1 className="display-1 jumbotron">5-Day Forcast</h1>
+                <h5 className="display-5 text-muted">New York, US</h5>
+                <div className="row justify-content-center">
+                    {this.formatDayCards()}
+                </div>
             </div>
         )
     }
