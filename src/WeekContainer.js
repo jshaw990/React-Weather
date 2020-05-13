@@ -1,10 +1,12 @@
 import React from 'react';
+import DegreeToggle from './DegreeToggle';
 import Card from './Card';
 import weatherKey from './secret';
 
 class WeekContainer extends React.Component {
     state = {
-        days: []
+        days: [],
+        degreeType: "fahrenheit"
     }
 
     componentDidMount = () => {
@@ -23,12 +25,22 @@ class WeekContainer extends React.Component {
     formatDayCards = () => {
         return this.state.days.map((day, index) => <Card day={day} key={index} />)
     }
+
+    updateForcastDegree = event => {
+        this.setState({
+            degreeType: event.target.value
+        }, () => console.log(this.state))
+    }
+
     render() {
 
         return (
             <div className="container">
                 <h1 className="display-1 jumbotron">5-Day Forcast</h1>
                 <h5 className="display-5 text-muted">New York, US</h5>
+                <div className="degree-toggle">
+                    <DegreeToggle />
+                </div>
                 <div className="row justify-content-center">
                     {this.formatDayCards()}
                 </div>
