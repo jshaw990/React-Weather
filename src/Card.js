@@ -16,7 +16,7 @@ class Card extends React.Component {
                 <div className="card bg-light">
                     <h3 className="card-title">{moment(newDate).format('dddd')}</h3>
                     <p className="text-muted">{moment(newDate).format('MMMM Do, h:mm a')}</p>
-                    <i classname={imgURL}></i>
+                    <i className={imgURL}></i>
                     <h2>{Math.round(this.props.day.main.temp)} °F</h2>
                     <div className="card-body">
                         <p className="card-text">{this.props.day.weather[0].description}</p>
